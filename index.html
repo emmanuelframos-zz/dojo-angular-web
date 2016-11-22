@@ -1,0 +1,50 @@
+<html ng-app>
+    <head>
+        <title>:: Ci&T Dojo Angular Team ::</title>
+    </head>
+    <body>       
+        People Name: <input type="text" ng-model="search.name" />
+        
+        <br/><br/>
+        
+        Filtering: {{ name }}
+
+        <br/><br/>       
+
+        <div ng-init="people=[
+                        {login:'EMMANUELF', name:'Emmanuel Ramos', age: 31, birthDate: '1985-11-29', salary: 8500.99}, 
+                        {login:'MVIDOLIN',  name:'Marcos Vidolin', age: 28, birthDate: '1988-05-03', salary: 10600.45},
+                        {login:'ALAN', name:'Alan Thiago', age: 31, birthDate: '1985-05-12', salary: 9400.31},
+                        {login:'LUIZSJ', name:'Luiz Souza', age: 26, birthDate: '1992-09-01', salary: 9250.23}
+                      ]">
+            <table border="1">
+                <tr>
+                    <th ng-click="sortBy='login';reverse=!reverse" class="pointer">Login</th>                                         
+                    <th ng-click="sortBy='name';reverse=!reverse" class="pointer">Name</th>                                         
+                    <th ng-click="sortBy='age';reverse=!reverse" class="pointer">Age</th>                    
+                    <th ng-click="sortBy='birthDate';reverse=!reverse" class="pointer">Birth Date</th>                    
+                    <th ng-click="sortBy='salary';reverse=!reverse" class="pointer">Salary</th>
+                </tr>
+                <tr ng-repeat="person in people | filter : search | orderBy:sortBy:reverse">
+                    <td>{{person.login | lowercase}}</td>                    
+                    <td>{{person.name | uppercase}}</td>                   
+                    <td>{{person.age}}</td>                   
+                    <td>{{person.birthDate | date: 'dd-MM-yyyy'}}</td>                  
+                    <td>{{person.salary | currency:'R$ '}}</td>
+                </tr>
+            </table>
+        </div>  
+        
+        <script src="angular.min.js"></script>
+        <script src="pt-br.js"></script>        
+        <style>
+            .pointer {
+                cursor:pointer;
+            }
+
+            td {
+                padding:0 1em;
+            }
+        </style>
+    </body>
+</html>
