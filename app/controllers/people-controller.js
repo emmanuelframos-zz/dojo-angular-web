@@ -1,4 +1,4 @@
-angular.module('people').controller('peopleController', ['monthsFactory', function (monthFactory) {
+angular.module('people').controller('peopleController', ['MonthsFactory', function (MonthsFactory) {
     
     vm = this;
 
@@ -8,8 +8,8 @@ angular.module('people').controller('peopleController', ['monthsFactory', functi
         { login: 'LUIZSJ', name: 'Luiz Souza', age: 26, birthDate: '1992-09-01', salary: 9250.23, months: [{'desc': 'aug', 'value': 33}, {'desc': 'sep', 'value': 33}, {'desc': 'oct', 'value': 33}] }
         ];
     
-    vm.loadMonth = function(){
-        return monthFactory.months;
+    vm.getMonths = function(){
+        return MonthsFactory.months;
     }   
 
 }]);

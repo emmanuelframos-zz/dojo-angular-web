@@ -1,7 +1,27 @@
-.pointer {
-   cursor:pointer;
+.pointer{
+    cursor: pointer;   
 }
 
 td {
-   padding:0 1em;
+    padding: 0 1em;
+}
+
+img {
+    width: 3em;
+    height: 3em;
+}
+
+.red{
+    color:red;
+    font-weight: bold;
+}
+
+.green{
+    color:green;
+    font-weight: bold;
+}
+
+.blue{
+    color: blue;
+    font-weight: bold;
 }

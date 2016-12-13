@@ -1,3 +1,3 @@
-angular.module('people').factory('monthsFactory', function () {
-    return {months:[{desc:'Aug'}, {desc: 'Sep'}, {desc: 'Oct'}]};
+angular.module('people').factory('MonthsFactory', function () {
+    return {months:[{desc:'Sep'}, {desc: 'Oct'}, {desc: 'Nov'}]};
 });

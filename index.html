@@ -3,6 +3,9 @@
         <title>:: Ci&T Dojo Angular Team ::</title>
         <!-- CSS -->
         <link rel="stylesheet" type="text/css" href="app.css">
+		<link rel="icon" type="image/png" sizes="32x32" href="app/images/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="app/images/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="app/images/favicon-16x16.png">
     </head>
     <body>       
         People Name: <input type="text" ng-model="search.name" />
@@ -18,8 +21,9 @@
                     <th ng-click="sortBy='age';reverse=!reverse" class="pointer">Age</th>                    
                     <th ng-click="sortBy='birthDate';reverse=!reverse" class="pointer">Birth Date</th>                    
                     <th ng-click="sortBy='salary';reverse=!reverse" class="pointer">Salary</th>
-                    <th ng-repeat="month in peopleCtrl.loadMonth()">{{month.desc}}</th>
+                    <th ng-repeat="month in peopleCtrl.getMonths()">{{month.desc}}</th>
                 </tr>
+
                 <tr ng-repeat="person in peopleCtrl.people | filter : search | orderBy:sortBy:reverse">
                     <td><input type="checkbox"></td>
                     <td>{{person.login | lowercase}}</td>                    
@@ -27,7 +31,7 @@
                     <td>{{person.age}}</td>                   
                     <td>{{person.birthDate | date: 'dd-MM-yyyy'}}</td>                  
                     <td>{{person.salary | currency:'R$ '}}</td>
-                    <td ng-repeat="month in person.months">{{month.value}}</td>
+                    <td ng-repeat="month in person.months">{{month.value}}%</td>
                 </tr>
             </table>
         </div>  
@@ -36,16 +40,6 @@
         <script src="pt-br.js"></script> 
         <script src="app.js"></script>
         <script src="app/controllers/people-controller.js"></script>
-        <script src="app/factories/people-factory.js"></script>
-           
-        <style>
-            .pointer {
-                cursor:pointer;
-            }
-
-            td {
-                padding:0 1em;
-            }
-        </style>
+        <script src="app/factories/people-factory.js"></script>    
     </body>
 </html>
