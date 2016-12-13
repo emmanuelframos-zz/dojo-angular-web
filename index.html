@@ -12,34 +12,40 @@
 
         <br/><br/>       
 
-        <div ng-controller="peopleController as peopleCtrl">
+        <div ng-controller="PeopleController as peopleCtrl">            
             <table border="1">
                 <tr>
                     <th class="pointer"><input type="checkbox" ></th>
+                    <th>Photo</th>
                     <th ng-click="sortBy='login';reverse=!reverse" class="pointer">Login</th>                                         
                     <th ng-click="sortBy='name';reverse=!reverse" class="pointer">Name</th>                                         
                     <th ng-click="sortBy='age';reverse=!reverse" class="pointer">Age</th>                    
                     <th ng-click="sortBy='birthDate';reverse=!reverse" class="pointer">Birth Date</th>                    
                     <th ng-click="sortBy='salary';reverse=!reverse" class="pointer">Salary</th>
                     <th ng-repeat="month in peopleCtrl.getMonths()">{{month.desc}}</th>
+                    <th ng-click="sortBy='productivityAverage';reverse=!reverse" class="pointer">Productivity</th>
                 </tr>
-
-                <tr ng-repeat="person in peopleCtrl.people | filter : search | orderBy:sortBy:reverse">
+                <tr ng-repeat="person in peopleCtrl.people | filter : search | orderBy:sortBy:reverse as peopleFiltered">
                     <td><input type="checkbox"></td>
+                    <td><img ng-src="{{person.photoUrl}}" /></td>
                     <td>{{person.login | lowercase}}</td>                    
                     <td>{{person.name | uppercase}}</td>                   
                     <td>{{person.age}}</td>                   
                     <td>{{person.birthDate | date: 'dd-MM-yyyy'}}</td>                  
                     <td>{{person.salary | currency:'R$ '}}</td>
-                    <td ng-repeat="month in person.months">{{month.value}}%</td>
+                    <td ng-repeat="month in person.productivityMonths">{{month.value}}%</td>       
+                    <td ng-class="{red:person.productivityAverage<50, blue:person.productivityAverage>=50 && person.productivityAverage<70, green: person.productivityAverage>=70}">{{person.productivityAverage | number:2}}%</td>
                 </tr>
             </table>
+            </br>
+            {{peopleFiltered.length}} results
         </div>  
         
         <script src="angular.min.js"></script>
         <script src="pt-br.js"></script> 
         <script src="app.js"></script>
         <script src="app/controllers/people-controller.js"></script>
+        <script src="app/services/people-service.js"></script>
         <script src="app/factories/people-factory.js"></script>    
     </body>
 </html>
