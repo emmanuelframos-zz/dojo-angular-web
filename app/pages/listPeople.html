@@ -1,0 +1,32 @@
+<!-- Page List People -->
+People Name: <input type="text" ng-model="filterObj.name" />              
+
+<br/> <br/> <br/>
+
+<div ng-controller="PeopleController as peopleCtrl">
+    <table border="1">              
+        <tr>
+            <th ng-click="sortBy='login';reverse=!reverse" class="pointer">Photo</th>          
+            <th ng-click="sortBy='login';reverse=!reverse" class="pointer">Login</th>                                         
+            <th ng-click="sortBy='name';reverse=!reverse" class="pointer">Name</th>                                         
+            <th ng-click="sortBy='age';reverse=!reverse" class="pointer">Age</th>                    
+            <th ng-click="sortBy='birthDate';reverse=!reverse" class="pointer">Birth Date</th>                    
+            <th ng-click="sortBy='salary';reverse=!reverse" class="pointer">Salary</th>
+            <th ng-repeat="month in peopleCtrl.getMonths()" class="pointer">{{month.desc}}</th>
+            <th ng-click="sortBy='productivityAverage';reverse=!reverse" class="pointer">Productivity</th>
+        </tr>            
+        <tr ng-repeat="person in peopleCtrl.people | filter:filterObj.name | orderBy:sortBy:reverse as filtered">
+            <td><image ng-src="{{person.photoUrl}}"></td>      
+            <td>{{person.login | lowercase}}</td>                    
+            <td>{{person.name | uppercase}}</td>                   
+            <td>{{person.age}}</td>                   
+            <td>{{person.birthDate | date: 'dd-MM-yyyy'}}</td>                  
+            <td>{{person.salary | currency:'R$ '}}</td>
+            <td ng-repeat="month in person.productivityMonths">{{month.value}}%</td>
+            <td><span ng-class="{red : person.productivityAverage < 50, blue: (person.productivityAverage >= 50 && person.productivityAverage < 70),  green: person.productivityAverage >= 70 }">{{person.productivityAverage | number:2}}%</span></td>
+        </tr>
+    </table>
+    <p ng-if="peopleCtrl.people.length > 0">{{filtered.length}} results</p>
+    <br/>
+    <input type="button" value="People Prize" ng-click="peopleCtrl.getPeoplePrize()">
+</div>         

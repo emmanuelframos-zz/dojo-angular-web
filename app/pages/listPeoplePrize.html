@@ -1,0 +1,17 @@
+<!-- Page People Prize -->
+<div ng-controller="PeoplePrizeController as peoplePrizeCtrl">
+    <table border="1">             
+        <tr>          
+            <th>Photo</th>         
+            <th>Name</th>            
+            <th>Productivity</th>
+            <th>Prize</th>
+        </tr>            
+        <tr ng-repeat="person in peoplePrizeCtrl.peoplePrize | orderBy:'name'">  
+            <td><image ng-src="{{person.photoUrl}}"></td>                          
+            <td>{{person.name | uppercase}}</td>                              
+            <td><span ng-class="{red : person.productivityAverage < 50, blue: (person.productivityAverage >= 50 && person.productivityAverage < 70),  green: person.productivityAverage >= 70 }">{{person.productivityAverage | number:2}}%</span></td>
+            <td>{{person.prize}}</td>                   
+        </tr>
+    </table>       
+</div>         
